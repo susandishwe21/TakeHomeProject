@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:take_home_app/res/controller/discover_controller.dart';
 import 'package:take_home_app/res/value.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -7,6 +8,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        Get.find<DiscoverController>().getAppointmentsSlot();
+      },
+    );
     return Scaffold(
       floatingActionButton: ElevatedButton(
         child: Text(
