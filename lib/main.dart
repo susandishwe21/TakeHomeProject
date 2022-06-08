@@ -27,9 +27,11 @@ class MyApp extends StatelessWidget {
     Get.put(DiscoverController());
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.cyan
-          //primaryColor: Color(0xffff8f00ff),
-          ),
+      theme: Theme.of(context).copyWith(
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: const Color(0xffff8f00ff),
+            ),
+      ),
       initialRoute: Nav.login,
       getPages: [
         GetPage(

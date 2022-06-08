@@ -21,10 +21,11 @@ class Network {
     }
   }
 
-  Future<dynamic> fetchSlots() async {
+  Future<dynamic> fetchSlots(String date) async {
+    debugPrint("sloat api : $getSlots$date");
     try {
       var response = await Dio().get(
-        getSlots,
+        getSlots + date,
         options: Options(
           responseType: ResponseType.bytes,
         ),
