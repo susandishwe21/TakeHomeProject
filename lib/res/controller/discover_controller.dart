@@ -15,6 +15,8 @@ class DiscoverController extends GetxController {
   var dateTime = DateTime.parse(DateTime.now().toString());
   var parsedDate;
   var slotIndex;
+  Map<String, dynamic> dataList = new Map<String, dynamic>();
+  Map<String, dynamic> priceList = new Map<String, dynamic>();
 
   @override
   void onInit() {
@@ -62,8 +64,12 @@ class DiscoverController extends GetxController {
           statusCode = value.statusCode;
         }
         if (statusCode == 200 || statusCode == 201) {
-          var data = utf8.decode(value.data!);
-          totalPrice = totalPriceFromJson(data.toString());
+          var data = jsonDecode(utf8.decode(value.data!));
+          //totalPrice = totalPriceFromJson(jsonDecode(data.toString()));
+          dataList = data['prices'];
+          priceList = data['prices']['ounce'];
+          debugPrint("DataList : $dataList");
+          debugPrint("Ounce : ${data['prices']['ounce']}");
           update();
         }
       },
