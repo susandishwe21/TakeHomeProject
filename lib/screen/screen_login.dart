@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:take_home_app/res/controller/discover_controller.dart';
+import 'package:take_home_app/res/controller/login_controller.dart';
 import 'package:take_home_app/res/value.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -34,7 +35,7 @@ class LoginScreen extends StatelessWidget {
               ),
         ),
         onPressed: () async {
-          Get.toNamed(Nav.home);
+          Get.find<LoginController>().login();
         },
       ),
     );

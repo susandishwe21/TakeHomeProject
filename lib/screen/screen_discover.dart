@@ -19,7 +19,7 @@ class DiscoverScreen extends StatelessWidget {
           child: Column(
             //mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: const [
               CarouselScreen(),
               AppointmentScreen(),
             ],
