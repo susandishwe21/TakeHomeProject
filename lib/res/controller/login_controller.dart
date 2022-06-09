@@ -14,7 +14,7 @@ class LoginController extends GetxController {
     try {
       final userCredential = await FirebaseAuth.instance.signInAnonymously();
       Get.toNamed(Nav.home);
-      debugPrint("User : ${userCredential.user?.displayName ?? ""} ");
+      debugPrint("User : ${userCredential.user?.isAnonymous ?? false} ");
       print("Signed in with temporary account.");
     } on FirebaseAuthException catch (e) {
       switch (e.code) {

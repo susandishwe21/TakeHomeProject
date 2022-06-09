@@ -30,24 +30,35 @@ class MyApp extends StatelessWidget {
     );
     Get.put(DiscoverController());
     Get.put(LoginController());
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: Theme.of(context).copyWith(
-        colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: const Color(0xffff8f00ff),
-            ),
-      ),
-      initialRoute: Nav.login,
-      getPages: [
-        GetPage(
-          name: Nav.login,
-          page: () => const LoginScreen(),
+    MediaQueryData windowData =
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    windowData = windowData.copyWith(
+      textScaleFactor: 1.0,
+    );
+    return MediaQuery(
+      data: windowData,
+      child: GetMaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: Theme.of(context).copyWith(
+          colorScheme: Theme.of(context).colorScheme.copyWith(
+                primary: const Color(0xffff8f00ff),
+              ),
+          scaffoldBackgroundColor: Colors.white,
+          primaryColor: Colors.white,
         ),
-        GetPage(
-          name: Nav.home,
-          page: () => const DiscoverScreen(),
-        )
-      ],
+        initialRoute: Nav.login,
+        getPages: [
+          GetPage(
+            name: Nav.login,
+            page: () => const LoginScreen(),
+          ),
+          GetPage(
+            name: Nav.home,
+            page: () => const DiscoverScreen(),
+          )
+        ],
+      ),
     );
   }
 }

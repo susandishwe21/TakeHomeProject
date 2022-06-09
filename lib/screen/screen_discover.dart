@@ -11,18 +11,20 @@ class DiscoverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        //appBar: AppBar(),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            //mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              CarouselScreen(),
-              AppointmentScreen(),
-            ],
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                CarouselScreen(),
+                AppointmentScreen(),
+              ],
+            ),
           ),
         ),
       ),
@@ -101,17 +103,22 @@ class AppointmentScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SizedBox(
-          height: 300,
-          child: SfDateRangePicker(
-            view: DateRangePickerView.month,
-            showActionButtons: true,
-            cancelText: "Cancel",
-            confirmText: "Ok",
-            onCancel: () {},
-            onSubmit: (value) {
-              Get.find<DiscoverController>().getAppointmentsSlot(value);
-            },
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+          child: Card(
+            child: SizedBox(
+              height: 300,
+              child: SfDateRangePicker(
+                view: DateRangePickerView.month,
+                showActionButtons: true,
+                cancelText: "Cancel",
+                confirmText: "Ok",
+                onCancel: () {},
+                onSubmit: (value) {
+                  Get.find<DiscoverController>().getAppointmentsSlot(value);
+                },
+              ),
+            ),
           ),
         ),
         //Display available and unavailable color
@@ -135,7 +142,7 @@ class AppointmentScreen extends StatelessWidget {
                   color: Colors.grey[500],
                   size: 18,
                 ),
-                const Text("UnAvailable"),
+                const Text("Unavailable"),
               ],
             )
           ],
@@ -156,70 +163,77 @@ class AppointmentScreen extends StatelessWidget {
             //Retrieve appointment slot with each date and times
             return Flexible(
               child: controller.slotIndex == -1
-                  ? const SizedBox(
-                      height: 30,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("Data isn't available"),
+                  ? const Padding(
+                      padding: EdgeInsets.only(top: 8.0, bottom: 8),
+                      child: SizedBox(
+                        height: 30,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Data isn't available"),
+                        ),
                       ),
                     )
-                  : SizedBox(
-                      height: 30,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: controller
-                              .appointmentsSlot?[controller.slotIndex]
-                              .slots
-                              .length,
-                          itemBuilder: (context, index) {
-                            bool availableDate = controller
-                                    .appointmentsSlot?[controller.slotIndex]
-                                    .slots[index]
-                                    .available ??
-                                false;
-                            var date = DateTime.parse(controller
-                                    .appointmentsSlot?[controller.slotIndex]
-                                    .slots[index]
-                                    .startTime ??
-                                "");
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                      child: SizedBox(
+                        height: 30,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: controller
+                                .appointmentsSlot?[controller.slotIndex]
+                                .slots
+                                .length,
+                            itemBuilder: (context, index) {
+                              bool availableDate = controller
+                                      .appointmentsSlot?[controller.slotIndex]
+                                      .slots[index]
+                                      .available ??
+                                  false;
+                              var date = DateTime.parse(controller
+                                      .appointmentsSlot?[controller.slotIndex]
+                                      .slots[index]
+                                      .startTime ??
+                                  "");
 
-                            String formattedTime = DateFormat.Hm().format(date);
+                              String formattedTime =
+                                  DateFormat.Hm().format(date);
 
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: OutlinedButton(
-                                style: availableDate == true
-                                    ? ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          TestColor().primaryColor,
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: OutlinedButton(
+                                  style: availableDate == true
+                                      ? ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                            TestColor().primaryColor,
+                                          ),
+                                          shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0))),
+                                        )
+                                      : ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                            Colors.grey[500],
+                                          ),
+                                          shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0))),
                                         ),
-                                        shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0))),
-                                      )
-                                    : ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Colors.grey[500],
-                                        ),
-                                        shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0))),
-                                      ),
-                                onPressed: () {},
-                                child: Text(
-                                  formattedTime,
-                                  style: TextStyle(color: Colors.white),
+                                  onPressed: () {},
+                                  child: Text(
+                                    formattedTime,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                      ),
                     ),
             );
           },
@@ -240,7 +254,14 @@ class AppointmentScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(
+                    'Thanks',
+                  ),
+                  duration: Duration(milliseconds: 500),
+                ));
+              },
               child: const Text(
                 "Appointment",
                 style: TextStyle(color: Colors.white),
