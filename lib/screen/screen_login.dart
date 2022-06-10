@@ -9,13 +9,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        var dateTime = DateTime.parse(DateTime.now().toString());
-        Get.find<DiscoverController>().getAppointmentsSlot(dateTime);
-        Get.find<DiscoverController>().getAllPrice();
-      },
-    );
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

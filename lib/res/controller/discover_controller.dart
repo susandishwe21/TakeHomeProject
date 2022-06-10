@@ -23,6 +23,7 @@ class DiscoverController extends GetxController {
     super.onInit();
   }
 
+  //call network call for get all appointment slots with each datetime
   getAppointmentsSlot(dateTime) async {
     isSlotLoading.value = true;
     update();
@@ -51,6 +52,7 @@ class DiscoverController extends GetxController {
     update();
   }
 
+//call network call for get all price
   getAllPrice() async {
     isPriceLoading.value = true;
     update();
