@@ -11,11 +11,30 @@ class Network {
           responseType: ResponseType.bytes,
         ),
       );
-      debugPrint("Response Banner : ${response.statusCode}");
+      debugPrint("Response Price : ${response.statusCode}");
       return response;
     } catch (e) {
       if (e is DioError) {
-        debugPrint("Response Banner : ${e.message}");
+        debugPrint("Response Price : ${e.message}");
+      }
+      return e;
+    }
+  }
+
+  Future<dynamic> fetchSlots(String date) async {
+    debugPrint("sloat api : $getSlots$date");
+    try {
+      var response = await Dio().get(
+        getSlots + date,
+        options: Options(
+          responseType: ResponseType.bytes,
+        ),
+      );
+      debugPrint("Response Slots : ${response.statusCode}");
+      return response;
+    } catch (e) {
+      if (e is DioError) {
+        debugPrint("Response Slots : ${e.message}");
       }
       return e;
     }
