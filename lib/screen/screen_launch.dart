@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/instance_manager.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
@@ -47,9 +46,9 @@ class LaunchScreen extends StatelessWidget {
             backgroundColor: Colors.white,
           ),
           Positioned(
-            bottom: 300,
-            left: 180,
-            right: 180,
+            bottom: 245,
+            left: 0,
+            right: 0,
             child: SpinKitChasingDots(
               color: TestColor().primaryColor,
               size: 50.0,

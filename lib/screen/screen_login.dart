@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:take_home_app/res/controller/discover_controller.dart';
 import 'package:take_home_app/res/controller/login_controller.dart';
 import 'package:take_home_app/res/value.dart';
 
